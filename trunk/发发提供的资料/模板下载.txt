@@ -1,0 +1,12 @@
+http://www.qinzhe.com/chinese/index.htm?bdclkid=05K_JK5Ev03zQjTktJbfVNpTx0_K0gscl7DK_CgU3ZvP
+
+13392827202   0
+
+
+用户表：UserInfoID、Name、Pwd、Phone、Address、IsAdmin(用户标示)。
+
+货品表:Products
+ID、ModelType(型号)、NubCount(库存数量)、Remark（备注）
+
+出\入库表 Stock
+ID、ProID、UserID、ComeNum(入库数量)、IsCome(入库还是出库)、PostTime(日期)

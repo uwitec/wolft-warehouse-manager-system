@@ -1,0 +1,237 @@
+
+
+
+
+增加套配置。
+配件与成品分开出入库。
+增加统计功能。按人员、日期、
+工资结算。（二期）
+
+
+
+
+产品和配件都有几种状态
+	
+产品的状态：
+	入库和出库
+	有几种情况：
+		成品入库，由配件组装好的成品，放入仓库。
+		成品出库，出货，把在仓库中的成品，出库。
+		瑕疵入库（返修入库），在出库后，发现有瑕疵，退还仓库。
+		返修制造人。
+		  
+	
+	
+配件的状态：
+	采购入库：正常
+	领料出库：领出（在外）
+	瑕疵入库：瑕疵（改：损耗）
+	
+	
+	
+	
+	
+	
+	
+	
+---菜单----
+入库管理
+	成品入库
+	配件入库	
+出库管理
+	成品出库
+	配件出库
+配置管理
+	人员管理（添加、删除、修改）
+	角色管理（系统管理员、仓库管理员，暂时就分这两类，可以后续增加）
+	权限管理（）
+	仓库管理（对仓库的管理，有哪些仓库，分布等）
+	价格管理
+	状态管理（货物的状态，此刻该货物是出库、入库等信息）
+	货物管理（添加、删除、修改货物）
+	货物类别
+	规格配置
+	资产类别配置
+	
+	
+		
+	
+	
+	
+	
+	
+	
+	考虑是用传统Web还是MVC方式来架构（都要考虑以后换数据库，比如以后要换成Accesss数据库等）
+		MVC：刚刚用该种方式做过机电项目，有些东西还有用的不是很熟练，是否要趁热打铁，巩固下呢
+			CodeFirst+Telerik控件方式。
+			DbFirst或ModelFirst方式
+		传统Web：很久没用了，是否应该用这种方式复习下。			
+			很多控件都没用过，比如左侧的菜单控件（easyUI控件），用的话会不会出现什么问题，是否花费的时间太多了。
+			
+	---确定，还是使用传统的Web开发方式，这样有助于复习。MVC+Telerik方式，刚刚用过，再搞的话很难在出新的成果了。
+	
+	
+	
+	
+	
+	
+
+配件和成品表（货物）：TGoods
+	FID,identity（1，1），主键ID
+	FName,名称(可以相同)
+	FSpecificationID,规格(不能相同，不能有默认值，要选，这样是提示用户)
+	FIsFitting,是否为配件，bool
+	FGoodTypeID,该货物的类型（为以后扩展用的，现在没有用到）---暂时不用。	
+	FRemark,备注信息，
+	FUserID,操作人(由谁添加的该条记录)
+	FStartTime,
+	FEndTime,
+	FCreateTime,
+	
+货物类型表：TGoodType(现在暂时只是成品和配件，但以后货物多了就会有更多的分类，所以的都可以分为成品和配件，但成品和配件下也可以再分类的)---此表可以暂时不用。
+	FID,identity(1,1),主键ID
+	FName,货物类型的名称
+	FRemark,备注信息	
+	FUserID,操作人(由谁添加的该条记录)
+	FStartTime,
+	FEndTime,
+	FCreateTime
+	
+	
+货物库存表：TStores
+	FID,int,identity(1,1)，主键ID
+	FGoodID，int，货物的主键ID
+	FQuantity，int，货物数量
+	FIsDefect,bit,是否瑕疵,默认为false：表示没有瑕疵，为正常。
+	FGoodStatusID，int，货物状态。共有上面的六种库存状态。
+	FWarehouseID，int
+	FPickingUserID,int,领料人（领料主要是领用配件，成品入库时也应该是他提交的，因为领料了多少套料，就要多少件成品入库）
+	FUserID,int,操作人(由谁添加的该条记录)
+	FStartTime,datetime,
+	FEndTime,datetime,
+	FCreateTime,datetime,
+	
+货物状态表：TGoodStatus
+	FID，int，identity（1，1），主键ID
+	FName，Varchar，货物状态的名称
+	FRemark,Varchar,状态说明	
+	FUserID,操作人(由谁添加的该条记录)
+	FStartTime，datetime，
+	FEndTime，datetime，
+	FCreateTime，datetime
+	
+仓库信息表：TWarehouse
+	FID，int，Identity（1,1),主键ID
+	FName，Varchar，仓库名称
+	FAddress，Varchar，地址
+	FSpecification,规格
+	FRemark，Varchar，备注信息	
+	FUserID,操作人(由谁添加的该条记录)
+	FStartTime，datetime
+	FEndTime，datetime
+	FCreateTime，datetime
+	
+	
+规格信息表：TSpecification
+	FID,int,identity(1,1),主键ID
+	FName,Varchar，规格名称
+	FSpeData,Varchar,规格数据
+	FSpeTypeID,int,规格类型ID（也可以叫资产类型。针对哪类的规格，这里暂时只规定三类：成品、配件、仓库）
+	FRemark,Varchar,备注说明	
+	FUserID,操作人(由谁添加的该条记录)
+	FStartTime,datetime
+	FEndTime,datetime
+	FCreateTime,datetime
+	
+针对规格类型表（可以叫资产类型）:TSpecificationType（针对哪类的规格，这里暂时只规定三类：成品、配件、仓库）
+	FID,int,identity(1,1),主键ID
+	FName,Varchar,规格类型名称
+	FRemark,Varchar,备注说明	
+	FUserID,操作人(由谁添加的该条记录)
+	FStartTime,datetime
+	FEndTime,datetime
+	FCreateTime,datetime
+	
+	
+价格表:TPrice
+	FID,int,identity(1,1),主键ID
+	FGoodsID,货物的ID(成品或是配件)
+	FPrice,int,该货物的当前单价
+	FUserID,操作人(由谁添加的该条记录)
+	FRemark,备注说明
+	FStartTime,datetime
+	FEndTime,datetime
+	FCreateTime,datetime
+	
+	
+	
+用户表：TUserInfo
+	FID，int，identity（1，1），主键ID
+	FName，Varchar，用户名
+	FNickname,Varchar,昵称（有可能只记得小名字，而不知道姓名）
+	FPassword，Varchar，密码，可以为空，因为有些人是不用该系统，为了方便，我把它们都合在一张表中。
+	FAddress,Varchar,地址
+	FPhoneNumber,Verchar,电话号码（有可能是手机，也有可能是固话）
+	FRoleID，int，用户角色
+	FRemark，备注信息
+	FStartTime，datatime，
+	FEndTime,datatime,
+	FCreateTime,datetime
+	
+用户角色表：TRoles（暂用三种角色：Admin、Boss、User）---或者：系统管理员（sysAdmin）、超级管理员（admin）、仓库管理员（warehouseAdmin）、领料人（pickingUser）
+	FID,int,identity（1，1），主键ID
+	FName，Varchar，角色名称
+	FCompetenceID，int，权限的ID
+	FRemark,varchar,备注信息
+	FStartTime，datetime
+	FEndTime，datetime
+	FCreateTime，datetime
+	
+权限表：TCompetence
+	FID，int，Identity（1，1），主键ID
+	FName,Varchar,权限名称
+	FRemark,varchar,备注信息
+	FStartTime,
+	FEndTime,
+	FCreateTime,
+	
+
+	注意：1、资产类别配置，主要是用来显示，不同页面可以选择的规格数据是不一样的，即不同的资产是不同的规格的，其实这个配置主要是给过滤数据的条件。
+	2、这个配置的作用，从现在看来，是可以也货物类别放在一起的（资产里面包括了所有的货物类别），即数据库表SpecificationType和表GoodType是可以共用一张表的。但为以后考虑，这样做也许不好，货物以后会越来越多，为了方便和效率吧，把它分开。
+	3、资产和货物是有本质的区别的，不能混在一起。
+	4、为什么想到用两张表，也考虑过合成一张表， 但是，考虑到成品、配件与仓库
+	
+	5、添加一条新的记录，默认的启用时间为当前时间，结束时间要在WebConfig文件中配置，在程序中读取。
+	
+	6、除用户、角色、权限这三个表外，其它的表都有FUserID，主要是想保留完整的记录信息，以后好查找。
+	
+	7、为什么要设计一个货物类型表：GoodType？？？答：为以后扩展用的，现在应该就只是成品和配件这两种，以后大了，就有可能不只是这两种了。
+	
+	8、配件和成品表（货物）：TGoods有两种方案：1）名称可能需要相同，可以设定规格不同，然后规格不设默认值，必须选，这样提示用户。2）名称不能相同。
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
