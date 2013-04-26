@@ -58,11 +58,13 @@
     <Compile Include="Models\TPrice.cs" />
     <Compile Include="Models\TR_Model_Comp_Role.cs" />
     <Compile Include="Models\TUserInfo.cs" />
-    <Compile Include="Models\WareHouseDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WareHouseDBContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
