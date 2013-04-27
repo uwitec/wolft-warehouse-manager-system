@@ -1,10 +1,11 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using Wolf.WareHouseManager.Model.Models.Mapping;
+using Wolf.WareHouseManager.Model.Models;
 
-namespace Wolf.WareHouseManager.Model.Models
+namespace Wolf.WareHouseManager.Context
 {
-    public partial class WareHouseDBContext : DbContext
+    public class WareHouseDBContext : DbContext
     {
         static WareHouseDBContext()
         {
