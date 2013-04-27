@@ -1,0 +1,5 @@
+E:\发发仓库管理项目\Wolf.WareHouseManager\Libary\Wolf.WareHouseManager.MssqlDal.dll
+E:\发发仓库管理项目\Wolf.WareHouseManager\Libary\Wolf.WareHouseManager.MssqlDal.pdb
+E:\发发仓库管理项目\Wolf.WareHouseManager\Wolf.WareHouseManager.MssqlDal\obj\Debug\ResolveAssemblyReference.cache
+E:\发发仓库管理项目\Wolf.WareHouseManager\Wolf.WareHouseManager.MssqlDal\obj\Debug\Wolf.WareHouseManager.MssqlDal.dll
+E:\发发仓库管理项目\Wolf.WareHouseManager\Wolf.WareHouseManager.MssqlDal\obj\Debug\Wolf.WareHouseManager.MssqlDal.pdb
